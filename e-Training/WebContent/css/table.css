@@ -1,0 +1,24 @@
+.table{
+	margin-top: 50px;
+	display: table;
+	margin: 0 auto;
+
+}
+
+.tableRow{
+	display: table-row;
+	color: black;
+}
+
+.tableRow>*{
+	display: table-cell;;
+	text-align: left;
+}
+
+.rigth{
+	text-align: right;
+}
+
+.left{
+	text-align: left;
+}
