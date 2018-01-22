@@ -1,0 +1,39 @@
+.container{
+	margin-left: auto ;
+	margin-right: auto ;
+	margin-top: 50px;
+	width: 300px;
+	padding-left: 100px;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: white;
+}
+
+body {
+	background-color: blue;
+}
+
+h1{
+	text-align: center;
+}
+
+.background{
+	background-color: blue;
+	width: 100%;
+    height: 30vh;
+    z-index: -1;
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+}
+
+.marginContainer{
+	margin-left: 300px;
+	margin-right: 300px;
+	padding-bottom: 100px;
+	padding-top: 50px;
+	width: 600px;
+	border: 1px solid black;
+	border-radius: 10px;
+}
