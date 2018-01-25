@@ -1,0 +1,60 @@
+img{
+	max-height: 50vh;
+	border-radius: 10px;
+}
+
+h2{
+	text-align: center;
+}
+
+
+body {
+  padding-top: 15px;
+  font-size: 12px;
+  background-color: #72A7C8;
+}
+.main {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.container{
+  margin-left: auto ;
+  margin-right: auto ;
+  margin-top: 150px;
+  width: 300px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+}
+
+h1{
+  text-align: center;
+  margin: 50px;
+}
+
+.accountType{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.marginContainer{
+  margin-left: 300px;
+  margin-right: 300px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  width: 600px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.background{
+  background-color: #72A7C8;
+  width: 100%;
+  height: 40vh;
+  z-index: -1;
+  position: fixed;
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+}
