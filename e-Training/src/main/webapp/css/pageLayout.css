@@ -1,0 +1,95 @@
+.page{
+	overflow: hidden;
+	display: flex;
+	position:absolute;
+	height: calc(100% - 120px);
+}
+
+.mycontainer{
+  width: 70vw;
+	height: 85%;
+	margin-left: 80px;
+	border: 1px solid black;
+	margin-top: 30px;
+	min-width: 600px;
+	background-color: white;
+	border-radius: 5px 5px 1px 5px;
+	display: block;
+}
+
+a{
+	outline: 0;
+}
+
+.tab {
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab-content {
+    overflow: auto;
+}
+
+.singolo {
+	border-radius: 3px;
+	border: 1px solid grey;
+	margin: 10px;
+  padding: 15px 10px 10px 30px;
+}
+
+.singolo:nth-child(even) {
+    background: #b6d2e2;
+}
+
+.form-horizontal{
+  height: 90%;
+  overflow: auto;
+}
+
+.footer{
+	border-top: 1px solid grey;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 3px;
+}
+
+.secondaBarra{
+	height: 100%;
+	width: 200px;
+}
+
+.secondaBarra ul.nav.sidebar-nav{
+	 border-right: 1px solid grey;
+}
+
+.secondaBarra ul.nav-tabs li:nth-child(odd){
+   background-color: #eeeeee;
+}
+
+.secondaBarra > .nav-tabs > li > a{
+	margin-right: 0;
+	border: 0;
+}
+
+.secondaBarra > .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus{
+	 background-color: transparent;
+   border: 0;
+   color: #333333;
+   cursor: pointer;
+}
+
+.secondaBarra > .nav-tabs > li.active > a:hover{
+   background-color: #eeeeee;
+   border: 0;
+   border-radius: 0px;
+   cursor: pointer;
+}
+
+.popover{
+  background-color: #b6d1e2 !important;;
+}
+
+.arrow:after{
+  border-bottom-color: #b6d1e2 !important;
+  border-top-color: #b6d1e2 !important;
+}

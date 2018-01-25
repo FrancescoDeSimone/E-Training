@@ -1,0 +1,36 @@
+.container{
+  margin-left: 150px;
+  margin-right: 150px;
+	margin-top: 50px;
+	padding-left: 40px;
+	padding-bottom: 10px;
+	padding-top: 30px;
+	border-radius: 10px;
+	background-color: white;
+  width: calc(100% - 300px);
+  border: 1px solid black;
+}
+
+h1{
+	padding-left: 280px;
+}
+
+.background{
+	background-color: #72A7C8;
+	width: 100%;
+  height: 40vh;
+  z-index: -1;
+  position: fixed;
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+}
+
+.popover{
+  background-color: #b6d1e2 !important;
+  width: 200px !important;
+}
+
+.arrow:after{
+  border-right-color: #b6d1e2 !important;
+}
