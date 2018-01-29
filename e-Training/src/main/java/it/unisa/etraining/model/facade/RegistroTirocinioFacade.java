@@ -24,6 +24,7 @@ import java.util.Comparator;
 /*
  * Questa classe fornisce un'interfaccia unificata per la gestione completa del
  * sottosistema relativo al registro del tirocinio.
+ * @author Flavio Esposito
  */
 public class RegistroTirocinioFacade {
 

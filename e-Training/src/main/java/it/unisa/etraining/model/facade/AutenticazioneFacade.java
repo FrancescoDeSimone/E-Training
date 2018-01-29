@@ -20,6 +20,7 @@ import it.unisa.etraining.model.dao.TutorDidatticoDao;
 /*
  * Questa classe fornisce un'interfaccia unificata per la gestione completa del
  * sottosistema relativo all'autenticazione.
+ * @author Flavio Esposito
  */
 public class AutenticazioneFacade {
   

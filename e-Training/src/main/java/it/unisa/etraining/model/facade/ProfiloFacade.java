@@ -15,6 +15,7 @@ import java.util.ArrayList;
 /*
  * Questa classe fornisce un'interfaccia unificata per la gestione completa del
  * sottosistema relativo alle gestione del profilo.
+ * @author Flavio Esposito
  */
 public class ProfiloFacade {
 

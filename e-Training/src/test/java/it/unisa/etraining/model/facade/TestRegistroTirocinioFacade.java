@@ -21,7 +21,7 @@ import it.unisa.etraining.model.facade.RegistroTirocinioFacade;
 
 /**
  * 
- * @author emanuele
+ * @author Flavio Esposito
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

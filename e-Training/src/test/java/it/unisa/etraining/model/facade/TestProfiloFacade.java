@@ -12,7 +12,7 @@ import it.unisa.etraining.model.facade.ProfiloFacade;
 
 /**
  * 
- * @author emanuele
+ * @author Flavio Esposito
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

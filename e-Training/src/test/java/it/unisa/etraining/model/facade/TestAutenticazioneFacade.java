@@ -17,7 +17,7 @@ import it.unisa.etraining.model.facade.AutenticazioneFacade;
 
 /**
  * 
- * @author emanuele
+ * @author Flavio Esposito
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
