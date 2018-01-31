@@ -21,7 +21,7 @@ import it.unisa.etraining.model.facade.TirocinioFacade;
 
 /**
  * 
- * @author emanuele
+ * @author Basso Emanuele
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

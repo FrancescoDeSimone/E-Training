@@ -18,7 +18,7 @@ import it.unisa.etraining.model.facade.OfferteFormativeFacade;
 
 /**
  * 
- * @author emanuele
+ * @author Basso Emanuele
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
