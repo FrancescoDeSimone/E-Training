@@ -114,13 +114,14 @@ public class TirocinanteDao {
       
       ResultSet rs = ps.executeQuery();
       
-      rs.next();
-      unTirocinante.setPassword(rs.getString("Password"));
-      unTirocinante.setNome(rs.getString("Nome"));
-      unTirocinante.setCognome(rs.getString("Cognome"));
-      unTirocinante.setMatricola(rs.getString("Matricola"));
-      unTirocinante.setAnnoIscrizione(rs.getString("AnnoIscrizione"));
-
+      if (rs.next()) {
+        unTirocinante.setPassword(rs.getString("Password"));
+        unTirocinante.setNome(rs.getString("Nome"));
+        unTirocinante.setCognome(rs.getString("Cognome"));
+        unTirocinante.setMatricola(rs.getString("Matricola"));
+        unTirocinante.setAnnoIscrizione(rs.getString("AnnoIscrizione"));
+      }
+      
       rs.close();    
       ps.close();
     } catch (SQLException e) {

@@ -38,9 +38,10 @@
 						<input onblur="testoCheck($(this))" data-placement="bottom" data-content="Errore inserimento testo" type="text" class="form-control" id="attivita"
 							placeholder="Attività (max. 50)" name="attivita" maxlength="250">
 					</div>
+					<img class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Inserire l'attività svolta durante il tirocinio">
 				</div>
 				
-				<div class="form-group">
+				<div style="display: flex;" class="form-group">
 					<label class="control-label col-sm-2">Data inizio:</label>
 					<div class="col-xs-4">
 						<input onblur="dataCheck($(this))" data-placement="top" data-content="Data non valida" 
@@ -52,6 +53,7 @@
 						<input onblur="dataCheck($(this))" data-placement="top" data-content="Data non valida" 
 						type="date" class="form-control" id=""dataFine"" name="dataFine">
 					</div>
+					<img style="margin-right: 10px" class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Inserire data inizio e fine dell'attività">
 				</div>
 				
 				<div class="form-group">
@@ -60,7 +62,8 @@
             <input onblur="oreCheck($(this))" data-placement="top" data-content="Ore non valide" 
             type="number" class="form-control" id="ore" placeholder="1" name="ore" min="1" max="99">
           </div>
-        </div>
+        	<img class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Inserire ore durata attività">
+		</div>
         
         <input type="hidden" value="<%= request.getParameter("idOfferta") %>" name="idOfferta">
 				
@@ -75,5 +78,10 @@
 	<% if(null != request.getParameter("errore")){ %>
   <script type="text/javascript">checkCampiAggiungiAttivita();</script>
   <%} %>
+    <script>
+		$(document).ready(function(){
+    	$('[data-toggle="tooltip"]').tooltip(); 
+    	});
+	</script>
 </body>
 </html>

@@ -120,17 +120,26 @@
           <td style="width: 400px" colspan="3">
               <div class="form-inline">
 	              <label>Facilitazioni:</label>
-	              <% for (int y = 0; y < listaProposte.get(i).getFacilitazioni().length; y++) { %>
-	              <span><% if (y!= 0)
-	                           out.print(" / ");
-	                         out.print(listaProposte.get(i).getFacilitazioni()[y]); %>
-	                </span>
-	              <% } 
-	                 
-	                 if (listaProposte.get(i).getFacilitazioni().length == 0) {
-	                   out.print("-");
-	                 }
-	              %>
+	              <% 
+                   ArrayList<String> facilitazioniTmp = new ArrayList<>();
+                   for (int k = 0; k < listaProposte.get(i).getFacilitazioni().length; k++) {
+                     if(!listaProposte.get(i).getFacilitazioni()[k].equals("disabilita"))
+                       facilitazioniTmp.add(listaProposte.get(i).getFacilitazioni()[k]);
+                   }
+                   
+                   for (int y = 0; y < facilitazioniTmp.size(); y++) { %>
+                <span>
+                <%
+                       if (y != 0)
+                         out.print(" / ");
+                       out.print(facilitazioniTmp.get(y)); %>
+                </span>
+                <% }
+                   
+                   if (facilitazioniTmp.size() == 0) {
+                     out.print("-");
+                   }
+                %>
               </div>
           </td>
           </tr>

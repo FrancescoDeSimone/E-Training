@@ -199,7 +199,7 @@ public class OffertaFormativaTirocinioEsternoDao {
       OffertaFormativaTirocinioEsterno unOfferta) {
     Connection con = null;
     boolean notError = false;
-
+    
     try {
       con = DriverManagerConnectionPool.getConnection();
 

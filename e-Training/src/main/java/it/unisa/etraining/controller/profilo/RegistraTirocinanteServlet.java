@@ -65,6 +65,13 @@ public class RegistraTirocinanteServlet extends HttpServlet {
     try {
       ProfiloFacade profiloFacade = new ProfiloFacade();
       
+      if (profiloFacade.contrallaRichiestaTirocinioGiaInviata(email)) {
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher("/registraTirocinante.jsp?errore=2");
+        dispatcher.forward(request, response);
+        return;
+      }
+      
       profiloFacade.aggiungiTirocinante(tirocinante);
     } catch (Exception e) {
       RequestDispatcher dispatcher = request

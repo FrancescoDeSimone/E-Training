@@ -23,7 +23,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>E-Training</title>
 	</head>
-<body onload="activate(1); ricercaOfferteFormative($('#azienda')); ricercaOffertaFormativa($('#offertaFormativa'));">
+<body onload="activate(1); ricercaOfferteFormative($('#azienda'));">
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<div class="page">
@@ -59,6 +59,7 @@
               %>
             </select>
           </div>
+          <img class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Selezionare un azienda convenzionata">
         </div>
 				
 				<div class="form-group">
@@ -69,6 +70,7 @@
               <option>-</option>
             </select>
           </div>
+          <img class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Selezionare un offerta formativa">
         </div>
 				
 				<div class="form-group">
@@ -79,6 +81,7 @@
 					   <option value="12">12</option>
 					  </select>
 					</div>
+					  <img class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Selezionare il numero di CFU inerenti al tirocinio">
 				</div>
 				<div class="form-group" style="padding-bottom: 0px;">
 					<label class="control-label col-sm-2">Obiettivi del tirocinio:</label>
@@ -91,6 +94,7 @@
               <div class="col-xs-5">
                 <button style="margin-bottom: 10px" type="button" class="btn btn-primary bottoni"
                   onclick="newLabel('Obiettivo (max. 50)');">+</button>
+                  <img style="margin-bottom: 10px" class="help" src="img/info.png" data-toggle="tooltip" data-placement="top" title="Inserire gli obbiettivi inerenti al tirocinio">
               </div>
             </div>
           </div>
@@ -135,8 +139,36 @@
 			</form>
 		</div>
 	</div>
-	<% if(null != request.getParameter("errore")){ %>
+	
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1" style="display: none;"></button>
+  <div id="myModal1" class="modal fade" role="dialog" style="margin-top: 100px;">
+    <div class="modal-dialog">
+    
+      <div class="modal-content alert alert-warning">
+        <div class="modal-body">
+          <h3>Hai gia richiesto un tirocinio per questa offerta formativa.</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        
+        </div>
+       </div>
+      </div>    
+     </div>
+	
+	<% 
+	String errore = request.getParameter("errore");
+	
+	if(null == errore) {
+	  // niente
+	} else if(errore.equals("1")) { %>
   <script type="text/javascript">checkCampiRichiestaTirocinio();</script>
-  <%} %>
+  <% } else if(errore.equals("2")) {%>
+  <script type="text/javascript">apriPopup();</script>  
+  <% } %>
+  <script>
+		$(document).ready(function(){
+    	$('[data-toggle="tooltip"]').tooltip(); 
+    	});
+	</script>
 </body>
 </html>

@@ -105,7 +105,14 @@ public class RichiestaTirocinioServlet extends HttpServlet {
     
     try {
       TirocinioFacade tirocinioFacade = new TirocinioFacade();
-      
+
+      if (tirocinioFacade.contrallaRichiestaTirocinioGiaInviata(tirocinante,offertaFormativa)) {
+        RequestDispatcher dispatcher = request
+            .getRequestDispatcher("/effettuaRichiestaTirocinio.jsp?errore=2");
+        dispatcher.forward(request, response);
+        return;
+      }
+          
       tirocinioFacade.richiediTirocinio(tirocinante, offertaFormativa, cfuInteger, obiettivi);
     } catch (Exception e) {
       RequestDispatcher dispatcher = request

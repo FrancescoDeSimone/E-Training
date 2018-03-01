@@ -1,6 +1,18 @@
+<%@page import="it.unisa.etraining.model.bean.Utente"%>
+<%@page import="it.unisa.etraining.model.bean.FunzionarioSegreteria"%>
 <header class="headerDiv">
 	<div class="right">
-		<img class="imageHeader rounded-circle" src="img/Logo.jpeg">
+	  <%
+      Utente utente = (Utente) session.getAttribute("utente");
+    
+      if (utente instanceof FunzionarioSegreteria) {
+    %>
+	  <a href="" style="text-decoration: none;">
+	  <% } else { %>
+	  <a href="TirociniAttiviStoricoServlet" style="text-decoration: none;">
+	  <% } %>
+	     <img class="imageHeader rounded-circle" src="img/Logo.jpeg">
+	  </a>
 		<h3 class="title">E-Training</h3>
 	</div>
 	<div class="left">

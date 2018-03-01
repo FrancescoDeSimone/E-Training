@@ -93,3 +93,37 @@ a{
   border-bottom-color: #b6d1e2 !important;
   border-top-color: #b6d1e2 !important;
 }
+
+.help{
+	width: 30px;
+	height: 30px;
+}
+
+.tooltip.top .tooltip-inner {
+	color: black;
+  background-color:#72A7C8;
+}
+   
+.tooltip.right .tooltip-inner {
+	color: black;
+  background-color:#72A7C8;
+}
+      
+.tooltip.bottom .tooltip-inner {
+	color: black;
+  background-color:#72A7C8;
+}
+  
+.tooltip.right .tooltip-arrow {
+	border-right-color: #72A7C8 !important;
+}
+  
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #72A7C8 !important;
+}
+  
+.tooltip.top .tooltip-arrow {
+  border-top-color: #72A7C8 !important;
+}
+  
+  

@@ -1,10 +1,6 @@
 .container{
-  margin-left: 150px;
-  margin-right: 150px;
 	margin-top: 50px;
-	padding-left: 40px;
-	padding-bottom: 10px;
-	padding-top: 30px;
+	padding: 0px;
 	border-radius: 10px;
 	background-color: white;
   width: calc(100% - 300px);
@@ -12,7 +8,7 @@
 }
 
 h1{
-	padding-left: 280px;
+	text-align: center;
 }
 
 .background{
@@ -33,4 +29,6 @@ h1{
 
 .arrow:after{
   border-right-color: #b6d1e2 !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
 }

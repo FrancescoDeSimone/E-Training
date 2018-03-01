@@ -148,6 +148,7 @@ public class TirocinioFacade {
    */
   public OffertaFormativaTirocinioEsterno mostraOffertaFormativaAzienda(String tema, 
       Azienda azienda) throws Exception {
+    
     OffertaFormativaTirocinioEsterno offerta = new OffertaFormativaTirocinioEsterno();
     offerta.setTema(tema);
     offerta.setAzienda(azienda);
@@ -165,6 +166,31 @@ public class TirocinioFacade {
     return offerta;
   }
   
+  /**
+   * Questo metodo controlla se un Tirocinante ha gia richiesto un tirocinio per quella
+   * data Offerta Formativa.
+   * @param tirocinante il tirocinante di cui verificare la richiesta.
+   * @param offerta l'offerta da controllare se gia è stata richiesta.
+   * @return true se è gia stata fatta richiesta, false altrimenti.
+   */
+  public boolean contrallaRichiestaTirocinioGiaInviata(Tirocinante tirocinante,
+      OffertaFormativaTirocinioEsterno offerta) throws Exception {
+    Tirocinio tirocinio = new Tirocinio();
+    tirocinio.setTirocinante(tirocinante);
+    tirocinio.setOfferta(offerta);
+   
+    boolean risultato1 = OffertaFormativaTirocinioEsternoDao
+        .ricercaOffertaFormativaTirocinioEsterno(offerta);
+   
+    boolean risultato2 = TirocinioDao.ricercaTirocinio(tirocinio);
+   
+    if (!risultato1 || !risultato2) {
+      throw new Exception("Database Error");
+    }
+   
+    return (tirocinio.getCfu() != 0);
+  }
+   
   /**
    * Questo metodo permette di salvare la richiesta di tirocinio di un dato tirocinante.
    * @param tirocinante colui che vuole richiedere il tirocinio

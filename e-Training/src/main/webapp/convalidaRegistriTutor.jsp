@@ -30,7 +30,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>E-Training</title>
 	</head>
-<body onload="activate(linkBarra);">
+<body onload="activate(linkBarra); valutaBottone(1);">
   <script type="text/javascript">var linkBarra;</script>
   
 	<jsp:include page="header.jsp"></jsp:include>
@@ -75,7 +75,7 @@
           <%
              }
           %>
-            <a data-toggle="pill" href="#Tirocinio<%=i+1%>"><span>
+            <a data-toggle="pill" href="#Tirocinio<%=i+1%>" onclick="valutaBottone(<%=i+1%>);"><span>
                 <%= listaRegistri.get(i).getOfferta().getTema() %></span></a></li> 
           <%
             }
@@ -85,10 +85,16 @@
       
       <div class="tab-content" style="width: calc(100% - 200px); overflow: hidden; height: 100%;">
           <div class="footer" style="border-top: 0; border-bottom: 1px solid grey; height: 45px;">
-           <form class="form-horizontal" role="form" method="get" action="mostraInformazioniRegistriTutor.jsp" id="cambiaPagina">
+           <form class="form-horizontal" role="form" method="get" style="margin-top: 2px;" 
+                  action="mostraInformazioniRegistriTutor.jsp" id="cambiaPagina">
               <label>Mostra le attività da convalidare</label>
               <input onchange="$('#cambiaPagina').submit();" checked data-toggle="toggle" type="checkbox">
            </form>
+           
+           <div style="margin-top: 2px; margin-right: auto;">
+             <button role="button" id="convalidaTutte" class="btn btn-primary" onclick="$('.btn-lg.sicuroConvalidaTutte').eq(0).click();">
+             Convalida tutte</button>
+           </div>
           </div> 
         <% 
           if (listaRegistri.size() == 0) {
@@ -110,7 +116,9 @@
            }
         %>
          <div style="display: flex; flex-direction: column; overflow: hidden; height: 100%;">
-         
+          <span id="emailTirocinante" style="display: none;"><%= listaRegistri.get(i).getTirocinante().getEmail()%></span>
+          <span id="idOfferta" style="display: none;"><%= listaRegistri.get(i).getOfferta().getId()%></span>
+          
           <div class="form-horizontal" style="padding: 20px; max-height: 40%; overflow: hidden;">
             <table>
               <tr>
@@ -184,17 +192,17 @@
             </table>         
          </div>     
          
-         <div style="overflow: auto; height: 60%;">
-         <% 
-           ArrayList<AttivitaRegistro> listaAttivitaScremate = 
-               new ArrayList<>(Arrays.asList(listaRegistri.get(i).getAttivitaSvolte()));
-           
-           for (int indice=0; indice < listaAttivitaScremate.size(); ) {
-             if (!listaAttivitaScremate.get(indice).getConvalida().equals(controllo))
-               listaAttivitaScremate.remove(indice);
-             else
-               indice++;
-           }
+         <div style="overflow: auto; height: 60%;" id="AttivitaTirocinio">
+         <%          
+	         ArrayList<AttivitaRegistro> listaAttivitaScremate = 
+	         new ArrayList<>(Arrays.asList(listaRegistri.get(i).getAttivitaSvolte()));
+	     
+	         for (int indice=0; indice < listaAttivitaScremate.size(); ) {
+	           if (!listaAttivitaScremate.get(indice).getConvalida().equals(controllo))
+	             listaAttivitaScremate.remove(indice);
+	           else
+	             indice++;
+	         }
          
            if (listaAttivitaScremate.size() == 0) { %>
           <div>
@@ -287,6 +295,22 @@
      </div>   
 	 </div>
 	</div>
+	
+	<button type="button" class="btn btn-info btn-lg sicuroConvalidaTutte" data-toggle="modal" data-target="#myModal2" style="display: none;"></button>
+  <div id="myModal2" class="modal fade" role="dialog" style="margin-top: 100px;">
+    <div class="modal-dialog">
+    
+      <div class="modal-content alert alert-warning">
+        <div class="modal-body">
+          <h3>Sei sicuro?</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="convalidaTutte();">Invia</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Annula</button>        
+        </div>
+       </div>
+      </div>    
+     </div>
 	
 	<button type="button" class="btn btn-info btn-lg sicuroConvalida" data-toggle="modal" data-target="#myModal1" style="display: none;"></button>
   <div id="myModal1" class="modal fade" role="dialog" style="margin-top: 100px;">

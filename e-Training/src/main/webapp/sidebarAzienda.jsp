@@ -8,7 +8,7 @@
 		</a></li>
 		<li><a href="ValutareRichiestaTirocinioServlet"> <span class="glyphicon"></span>Richieste tirocinio
     </a></li>
-		<li><a href="#"> <span class="glyphicon"></span>Dettagli tutor didattico
+		<li><a href="#"> <span class="glyphicon"></span>Dettagli tutor didattici
 		</a></li>
 		<li><a href="#"> <span class="glyphicon"></span>Tutor aziendali
 		</a></li>

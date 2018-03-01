@@ -79,10 +79,11 @@ public class TirocinioDao {
            
       ResultSet rs = ps.executeQuery();
       
-      rs.next();
-      unTirocinio.setCfu(rs.getInt("CFU"));
-      unTirocinio.setOreRimanenti(rs.getInt("OreRimanenti"));
-      unTirocinio.setStatus(rs.getString("Status"));
+      if (rs.next()) {
+        unTirocinio.setCfu(rs.getInt("CFU"));
+        unTirocinio.setOreRimanenti(rs.getInt("OreRimanenti"));
+        unTirocinio.setStatus(rs.getString("Status"));
+      }
                   
       rs.close();    
       ps.close();

@@ -153,4 +153,54 @@ public class RegistroTirocinioFacade {
     }
   }
   
+  /**
+   * Questo metodo permette di salvare la scelta di un tutor sulla convalida  
+   * di tutte le attività di tirocinio.
+   * @param tirocinio l'oggetto di cui convalidare tutte le attività.
+   * @throws Exception lanciata nel caso in cui si verificano errori sul 
+   *     database.
+   */
+  public void convalidaTutteAttivita(Tirocinio tirocinio) throws Exception {
+    boolean risultato1 = AttivitaRegistroDao.aggiornaConvalidaTutteAttivita(tirocinio);
+    
+    boolean risultato2 = true;
+    boolean risultato3 = true;
+    boolean risultato4 = true;
+    boolean risultato5 = true;
+    if (tirocinio.getAttivitaSvolte()[0].getConvalida().equals(AttivitaRegistro.CONVALIDATA)) {
+      ArrayList<AttivitaRegistro> tutteAttivita = new ArrayList<>();
+      
+      risultato2 = AttivitaRegistroDao.ricercaTutteAttivitaRegistro(tutteAttivita,tirocinio);
+
+      int oreAttivita = 0;
+      for (int indice = 0; indice < tutteAttivita.size(); indice++) {
+        if (tutteAttivita.get(indice).getConvalida().equals(AttivitaRegistro.CONVALIDATA)) {
+          oreAttivita += tutteAttivita.get(indice).getOreSvolte();
+        }
+      }
+      
+      risultato3 = TirocinioDao.ricercaTirocinio(tirocinio);
+      
+      int oreTotali = tirocinio.getCfu() * 25;
+      
+      int ore;
+      if (oreTotali < oreAttivita) {
+        ore = 0;
+      } else {
+        ore = oreTotali - oreAttivita;
+      }
+      
+      tirocinio.setOreRimanenti(ore);
+      risultato4 = TirocinioDao.aggiornOreTirocinio(tirocinio);
+      
+      if (ore == 0) {
+        tirocinio.setStatus(Tirocinio.TERMINATO);
+        risultato5 = TirocinioDao.aggiornaStatusTirocinio(tirocinio);
+      }
+    }
+    
+    if (!risultato1 || !risultato2 || !risultato3 || !risultato4 || !risultato5) {
+      throw new Exception("Database Error");
+    }
+  }
 }

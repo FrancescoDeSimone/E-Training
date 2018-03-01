@@ -7,6 +7,8 @@ var convalidaScelta;
 var emailTirocinante;
 var idOffertaRegistro;
 var attivitaSvolta;
+var emailTirocinanteRegistro;
+var idOffertaRegistroTutte;
 
 function newLabel(stringa){
 	
@@ -36,15 +38,15 @@ function newLabel(stringa){
 }
 
 function ritornaMostraOfferte() {
-	 window.location.href = "http://localhost:8080/fakeE-Training/MostraOfferteFormativeEsterneServlet";
+	 window.location.href = "http://localhost:8080/e-Training/MostraOfferteFormativeEsterneServlet";
 }
 
 function ritornaTirociniAttiviStorico() {
-	 window.location.href = "http://localhost:8080/fakeE-Training/TirociniAttiviStoricoServlet";
+	 window.location.href = "http://localhost:8080/e-Training/TirociniAttiviStoricoServlet";
 }
 
 function ritornaRegistro() {
-	 window.location.href = "http://localhost:8080/fakeE-Training/VisualizzaRegistriTirocinanteServlet";
+	 window.location.href = "http://localhost:8080/e-Training/VisualizzaRegistriTirocinanteServlet";
 }
 
 function apriPopup() {
@@ -52,7 +54,7 @@ function apriPopup() {
 }
 
 function rimuoviTirocinante() {
-	 window.location.href = "http://localhost:8080/fakeE-Training/RimuoviTirocinanteServlet";
+	 window.location.href = "http://localhost:8080/e-Training/RimuoviTirocinanteServlet";
 }
 
 function accettaRifiutaPropostaTirocinioSicuro(s,id) {
@@ -63,7 +65,7 @@ function accettaRifiutaPropostaTirocinioSicuro(s,id) {
 }
 
 function accettaRifiutaPropostaTirocinio() {
-	window.location.href = "http://localhost:8080/fakeE-Training/ValutareOffertaFormativaTirocinioEsternoServlet" +
+	window.location.href = "http://localhost:8080/e-Training/ValutareOffertaFormativaTirocinioEsternoServlet" +
 			"?scelta=" + scelta + "&id=" + idScelta;
 }
 
@@ -136,21 +138,42 @@ function ricercaOffertaFormativa(selectInput) {
 		            text: data.tutorA,
 		      }));
 			  
+			  
+			  var disabilita = false;
 			  if (data.facilitazione0 != undefined) {
-				  var stringaFacilitazioni = data.facilitazione0;
-				  
+				  if (data.facilitazione0 == "disabilita") {
+					  disabilita = true;
+				  } else {
+					  var stringaFacilitazioni = data.facilitazione0;
+				  }
+
 				  if (data.facilitazione1 != undefined) {
-					  stringaFacilitazioni += " / " +data.facilitazione1;
+					  if (data.facilitazione1 == "disabilita") {
+						  disabilita = true;
+					  } else {
+						  stringaFacilitazioni += " / " +data.facilitazione1;
+					  }
 					  
 					  if (data.facilitazione2 != undefined) {
-						  stringaFacilitazioni += " / " +data.facilitazione2;
+						  if (data.facilitazione2 == "disabilita") {
+							  disabilita = true;
+						  } else {
+							  stringaFacilitazioni += " / " +data.facilitazione2;
+						  }
 
 						  if (data.facilitazione3 != undefined) {
-							  stringaFacilitazioni += " / " +data.facilitazione3;
+							  if (data.facilitazione3 == "disabilita") {
+								  disabilita = true;
+							  } else {
+								  stringaFacilitazioni += " / " +data.facilitazione3;
+							  }
 							  
 							  if (data.facilitazione4 != undefined) {
-								  stringaFacilitazioni += " / " +data.facilitazione4;
-								  
+								  if (data.facilitazione4 == "disabilita") {
+									  disabilita = true;
+								  } else {
+									  stringaFacilitazioni += " / " +data.facilitazione4;
+								  }
 							  }
 						  }
 					  }
@@ -163,6 +186,22 @@ function ricercaOffertaFormativa(selectInput) {
 				  listaCampi.eq(5).append($('<span>', {
 			            text: "-",
 			      }));
+			  }
+			  
+			  var div = $("#disabilita");
+			  var where = $(".singolo legend").eq(0);
+			  var img = `<div id="disabilita" style="position: relative;">
+	          		<img style="position: absolute;right: 0px;top: 0px;" class="help" src="img/accessible.png" data-toggle="tooltip" data-placement="bottom" 
+	              	title="Questa azienda fornisce agevolazioni per studenti con disabilità motorie">
+	              </div>`;
+
+			  if (div.length != 0) {
+				  div.remove();
+			  }
+			  
+			  if (disabilita) {
+				  where.after(img);
+				  $('[data-toggle="tooltip"').tooltip();
 			  }
 		  }
 	});
@@ -177,7 +216,7 @@ function accettaRifiutaRichiestaTirocinioSicuro(s,tirocinante,idOffertaFormativa
 }
 
 function accettaRifiutaRichiestaTirocinio() {
-	window.location.href = "http://localhost:8080/fakeE-Training/AccettareRifiutareRichiestaTirocinioServlet" +
+	window.location.href = "http://localhost:8080/e-Training/AccettareRifiutareRichiestaTirocinioServlet" +
 			"?scelta=" + sceltaRichiesta + tirocinio;
 }
 
@@ -199,8 +238,27 @@ function inviaConvalida(motivazioneRifiuto) {
 	if (motivazioneRifiuto != undefined)
 		aggiungi = "&motivazione=" + motivazioneRifiuto.val();
 	
-	window.location.href = "http://localhost:8080/fakeE-Training/ConvalidaAttivitaRegistroServlet" +
+	window.location.href = "http://localhost:8080/e-Training/ConvalidaAttivitaRegistroServlet" +
 	"?scelta=" + convalidaScelta + "&email=" + emailTirocinante + "&id=" + idOffertaRegistro +
 	"&attivitaSvolta=" + attivitaSvolta + aggiungi;
+}
+
+function valutaBottone(pos) {
+	var attivitaNumero = $("#Tirocinio" + pos).find("#AttivitaTirocinio").find(".singolo");
+	var convalidaTutteButton = $("#convalidaTutte");
+	
+	if (attivitaNumero.length == 0) {
+		convalidaTutteButton.attr("disabled",true);
+	} else {
+		emailTirocinanteRegistro = $("#Tirocinio" + pos).find("#emailTirocinante").text();
+		idOffertaRegistroTutte = $("#Tirocinio" + pos).find("#idOfferta").text();
+			
+		convalidaTutteButton.attr("disabled",false);
+	}
+}
+
+function convalidaTutte() {
+	window.location.href = "http://localhost:8080/e-Training/ConvalidaTutteAttivitaRegistroServlet" +
+	"?email=" + emailTirocinanteRegistro + "&id=" + idOffertaRegistroTutte;
 }
 

@@ -80,7 +80,8 @@
       
       <div class="tab-content" style="width: calc(100% - 200px); overflow: hidden; height: 100%;">
           <div class="footer" style="border-top: 0; border-bottom: 1px solid grey; height: 45px;">
-           <form class="form-horizontal" role="form" method="get" action="convalidaRegistriTutor.jsp" id="cambiaPagina">
+           <form class="form-horizontal" role="form" method="get" style="margin-top: 2px;" 
+                    action="convalidaRegistriTutor.jsp" id="cambiaPagina">
               <label>Mostra le attività da convalidare</label>
               <input onchange="$('#cambiaPagina').submit();" data-toggle="toggle" type="checkbox">
            </form>

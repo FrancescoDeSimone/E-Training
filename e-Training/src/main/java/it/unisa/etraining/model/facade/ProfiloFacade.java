@@ -20,6 +20,24 @@ import java.util.ArrayList;
 public class ProfiloFacade {
 
   /**
+   * Questo metodo controlla se un Tirocinante si è gia iscritto alla piattaforma.
+   * @param email l'email del tirocinante di cui verificare l'iscrizione.
+   * @return true se è gia iscritto, false altrimenti.
+   */
+  public boolean contrallaRichiestaTirocinioGiaInviata(String email) throws Exception {
+    Tirocinante tirocinante = new Tirocinante();
+    tirocinante.setEmail(email);
+    
+    boolean risultato = TirocinanteDao.ricercaTirocinante(tirocinante);
+   
+    if (!risultato) {
+      throw new Exception("Database Error");
+    }
+   
+    return (tirocinante.getNome() != null);
+  }
+  
+  /**
    * Questo metodo permette di aggiungere un Tirocinante al sistema.
    * @param tirocinante l'oggetto da salvare.
    * @throws Exception lanciata nel caso in cui si verificano errori sul 

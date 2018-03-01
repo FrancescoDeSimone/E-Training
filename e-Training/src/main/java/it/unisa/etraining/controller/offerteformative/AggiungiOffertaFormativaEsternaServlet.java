@@ -67,6 +67,11 @@ public class AggiungiOffertaFormativaEsternaServlet extends HttpServlet {
     facilitazioniTmp.removeAll(Collections.singleton(null));
     facilitazioniTmp.removeAll(Collections.singleton(""));
     
+    String disabilita = request.getParameter("disabilita");
+    if (null != disabilita) {
+      facilitazioniTmp.add("disabilita");
+    }
+    
     String[] facilitazioni = new String[facilitazioniTmp.size()];
     for (int i = 0; i < facilitazioniTmp.size(); i++) {
       facilitazioni[i] = facilitazioniTmp.get(i);
@@ -88,6 +93,7 @@ public class AggiungiOffertaFormativaEsternaServlet extends HttpServlet {
       dispatcher.forward(request, response);
       return;
     }
+    
     if (facilitazioniTmp.size() != 0) {     
       for (String s : facilitazioni) {
         if (s == null || !s.matches(regexFacilitazione)) {

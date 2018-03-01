@@ -176,9 +176,9 @@ public class AttivitaRegistroDao {
   }
   
   /**
-   * Questo metodo permette di ricercare un oggetto AttivitaRegistro sul database.
-   * @param unAttivita l'oggetto da ricercare sul database.
-   * @return true se l'attivita' viene correttamente ricercata, false altrimenti.
+   * Questo metodo permette di aggiornare la convalida di un oggetto AttivitaRegistro sul database.
+   * @param unAttivita l'oggetto da aggiornare sul database.
+   * @return true se l'attivita' viene correttamente aggiornata, false altrimenti.
    */
   public static synchronized boolean aggiornaConvalidaAttivita(AttivitaRegistro unAttivita) {
     Connection con = null;
@@ -219,6 +219,51 @@ public class AttivitaRegistroDao {
     
     return notError;
   }
+  
+  /**
+   * Questo metodo permette di aggiornare la convalida di tutte le AttivitaRegistro di 
+   * un Tirocinio sul database.
+   * @param unTirocinio l'oggetto di cui aggiornare le AttivitaRegistro sul database.
+   * @return true se le attivita' vengono correttamente aggiornate, false altrimenti.
+   */
+  public static synchronized boolean aggiornaConvalidaTutteAttivita(Tirocinio unTirocinio) {
+    Connection con = null;
+    boolean notError = true;
+    
+    try {
+      con = DriverManagerConnectionPool.getConnection();
+      
+      PreparedStatement ps = con.prepareStatement(AGGIORNA_CONVALIDA_TUTTE_ATTIVITA);
+      
+      String convalida = unTirocinio.getAttivitaSvolte()[0].getConvalida();
+      
+      ps.setString(1,convalida);
+      ps.setString(2,unTirocinio.getTirocinante().getEmail());
+      ps.setInt(3,unTirocinio.getOfferta().getId());
+      
+      if (convalida.equals(AttivitaRegistro.CONVALIDATA_TUTOR_AZIENDALE)) {
+        ps.setString(4,AttivitaRegistro.IN_CONVALIDA);
+      } else if (convalida.equals(AttivitaRegistro.CONVALIDATA)) {
+        ps.setString(4,AttivitaRegistro.CONVALIDATA_TUTOR_AZIENDALE);
+      }
+      
+      ps.executeUpdate();
+      
+      ps.close();
+    } catch (SQLException e) {
+      Logger.getLogger("AttivitaRegistroDao").log(Level.SEVERE,"Database Error",e);
+      notError = false;
+    } finally {
+      try {
+        DriverManagerConnectionPool.releaseConnection(con);
+      } catch (SQLException e) {
+        Logger.getLogger("AttivitaRegistroDao").log(Level.SEVERE,"Database Error",e);
+        notError = false;
+      }
+    }
+    
+    return notError;
+  }
 
   private static final String NOME_TABELLA = " eTraining.AttivitaRegistro ";
   
@@ -238,8 +283,13 @@ public class AttivitaRegistroDao {
 
   private static final String AGGIORNA_CONVALIDA_ATTIVITA = "UPDATE" + NOME_TABELLA
                                                      + "SET Convalida = ?, MotivazioneRifiuto = ? "
-                                                          + "WHERE Tirocinante = ? "
+                                                     + "WHERE Tirocinante = ? "
                                                      + "AND IdOffertaFormativaTirocinioEsterno = ? "
-                                                          + "AND AttivitaSvolta = ?";
+                                                     + "AND AttivitaSvolta = ?";
   
-} 
+  private static final String AGGIORNA_CONVALIDA_TUTTE_ATTIVITA = "UPDATE" + NOME_TABELLA
+                                                    + "SET Convalida = ? "
+                                                    + "WHERE Tirocinante = ? "
+                                                    + "AND IdOffertaFormativaTirocinioEsterno = ? "
+                                                    + "AND Convalida = ?";
+}
